@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './dashboard/pages/Login';
 import MainLayout from './dashboard/layout/MainLayout';
 import Adminindex from './dashboard/pages/Adminindex';
+import ProtectDashboard from './middleware/ProtectDashboard';
  
 
 function App() { 
@@ -11,8 +12,10 @@ function App() {
      <BrowserRouter>
      <Routes>
       <Route path='/login' element={<Login/>} />
-        <Route path='/dashboard' element={<MainLayout/>}>
-          <Route path='' element={<Navigate to='/dashboard/admin'/>}>
+      
+        <Route path='/dashboard' element={<ProtectDashboard/>}>
+        <Route path='' element={<MainLayout/>} >
+          <Route path='' element={<Navigate to='/dashboard/admin'/>}/>
             <Route path='admin' element={<Adminindex/>} />
           </Route>
         
