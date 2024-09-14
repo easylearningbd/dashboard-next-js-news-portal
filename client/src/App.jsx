@@ -12,7 +12,10 @@ function App() {
      <Routes>
       <Route path='/login' element={<Login/>} />
         <Route path='/dashboard' element={<MainLayout/>}>
-        <Route path='admin' element={<Adminindex/>} />
+          <Route path='' element={<Navigate to='/dashboard/admin'/>}>
+            <Route path='admin' element={<Adminindex/>} />
+          </Route>
+        
 
         </Route>
      </Routes>
