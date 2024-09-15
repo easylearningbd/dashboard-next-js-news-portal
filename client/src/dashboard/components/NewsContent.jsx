@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { FaEye } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 
 const NewsContent = () => {
 
@@ -66,9 +68,30 @@ const NewsContent = () => {
         }
 
     </tbody>
-</table>
-
+</table> 
     </div>
+
+ 
+<div className='flex justify-between items-center py-6'>
+    <div className='flex items-center gap-4'>
+        <label className='text-sm font-semibold'>News Per Page:</label>
+        <select name="category" id="category" className='px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none'>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+        </select>
+    </div>
+
+    <div className='flex items-center gap-4 text-sm text-gray-600'>
+        <span>6/10 of 5</span>
+        <div className='flex gap-2'>
+        <IoIosArrowBack className='w-6 h-6 text-gray-400 cursor-pointer hover:text-gray-800' />
+        <IoIosArrowForward  className='w-6 h-6 text-gray-400 cursor-pointer hover:text-gray-800' />
+        </div> 
+    </div> 
+</div>
+
     
 </div>
     );
