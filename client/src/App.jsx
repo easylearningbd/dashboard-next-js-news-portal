@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom' 
 import Login from './dashboard/pages/Login';
 import MainLayout from './dashboard/layout/MainLayout';
@@ -12,12 +12,12 @@ import AddWriter from './dashboard/pages/AddWriter';
 import Writers from './dashboard/pages/Writers';
 import Writerindex from './dashboard/pages/Writerindex';
 import CreateNews from './dashboard/pages/CreateNews';
+import storeContext from './context/storeContext';
  
 
 function App() { 
-  const userInfo = {
-    role: "writer"
-  } 
+
+   const {store} = useContext(storeContext)
 
   return (
      <BrowserRouter>
@@ -26,7 +26,7 @@ function App() {
       
         <Route path='/dashboard' element={<ProtectDashboard/>}>
         <Route path='' element={<MainLayout/>} >
-          <Route path='' element={userInfo.role === 'admin' ? <Navigate to='/dashboard/admin'/> : <Navigate to='/dashboard/writer'/>}/>
+          <Route path='' element={store.userInfo.role === 'admin' ? <Navigate to='/dashboard/admin'/> : <Navigate to='/dashboard/writer'/>}/>
           <Route path='unable-access' element={<Unable/>} />
 
           <Route path='profile' element={<Profile/>} />
