@@ -4,6 +4,7 @@ import { MdDashboard } from "react-icons/md";
 import { BiNews } from "react-icons/bi";
 import { PiUsersFill } from "react-icons/pi";
 import { FaHouseUser } from "react-icons/fa";
+import { IoMdAdd } from "react-icons/io";
 
 
 const Sidebar = () => {
@@ -29,6 +30,13 @@ const Sidebar = () => {
         <Link to='/dashboard/news' className={`px-3 ${pathname === '/dashboard/news' ? 'bg-indigo-500 text-white' : 'bg-white text-[#404040f6]'} py-2 hover:shadow-lg hover:shadow-indigo-500/20 w-full rounded-lg flex gap-x-2 justify-start items-center hover:bg-indigo-500 hover:text-white `} >
         <span className='text-[18px]'><BiNews /></span>
         <span className='text-[18px]'>News</span>
+        </Link>
+    </li>
+
+    <li>
+        <Link to='/dashboard/news/create' className={`px-3 ${pathname === '/dashboard/news/create' ? 'bg-indigo-500 text-white' : 'bg-white text-[#404040f6]'} py-2 hover:shadow-lg hover:shadow-indigo-500/20 w-full rounded-lg flex gap-x-2 justify-start items-center hover:bg-indigo-500 hover:text-white `} >
+        <span className='text-[18px]'><IoMdAdd  /></span>
+        <span className='text-[18px]'>Add News</span>
         </Link>
     </li>
 
