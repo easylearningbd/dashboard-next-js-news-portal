@@ -11,7 +11,7 @@ const decode_token = (token) => {
             } else {
                 return decode_token
             }
-        } catch (error) {
+        } catch (error) {  
              return ""
         }
     } else {
