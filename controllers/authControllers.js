@@ -44,7 +44,11 @@ class authController {
 
     }
     //End Method
-    
+
+    add_writer = async(req,res) => {
+        console.log(req.body)
+    }
+      //End Method
 
 }
 module.exports = new authController()

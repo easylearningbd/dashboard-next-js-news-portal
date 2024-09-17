@@ -37,7 +37,7 @@ const AddWriter = () => {
                 headers: {
                     'Authorization' : `Bearer ${store.token}`
                 }
-            } )
+            } )              
             setLoader(false) 
             toast.success(data.message)
             navigate('/dashboard/writers') 
