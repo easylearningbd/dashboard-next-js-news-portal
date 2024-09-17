@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { base_url } from '../../config/config';
 import axios from 'axios'
@@ -33,11 +33,15 @@ const getWriterData = async () => {
             category: data.writer.category,
             role: data.writer.role,
         })        
-         
+         console.log(data);
     } catch (error) { 
         toast.error('Failed to load writer data')
     }
 }
+
+    useEffect(() => {
+        getWriterData();
+    },[id]);
 
     const inputHandle = (e) => {
         setState({
