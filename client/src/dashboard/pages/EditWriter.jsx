@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { base_url } from '../../config/config';
 import axios from 'axios'
 import storeContext from '../../context/storeContext';
+import toast from 'react-hot-toast'
 
 const EditWriter = () => {
 
@@ -33,7 +34,7 @@ const getWriterData = async () => {
             category: data.writer.category,
             role: data.writer.role,
         })        
-         console.log(data);
+          
     } catch (error) { 
         toast.error('Failed to load writer data')
     }
@@ -50,6 +51,25 @@ const getWriterData = async () => {
         })
     }
 
+    const handleUpdateWriter = async (e) => {
+        e.preventDefault() 
+        try {
+            setLoader(true)
+            await axios.put(`${base_url}/api/update/writer/${id}`,state, {
+                headers: {
+                    'Authorization' : `Bearer ${store.token}`
+                }
+            } )              
+            setLoader(false) 
+            toast.success('Writer Update Success')
+            navigate('/dashboard/writers') 
+        } catch (error) {
+            setLoader(false)
+            toast.error(error.response.data.message)
+        }
+    }
+
+
     return (
         <div className='bg-white rounded-md'>
             <div className='flex justify-between p-4'>
@@ -60,7 +80,7 @@ const getWriterData = async () => {
             </div>
         
         <div className='p-4'>
-            <form >
+            <form onSubmit={handleUpdateWriter}>
                 <div className='grid grid-cols-2 gap-x-8 mb-3'>
                     
                     <div className='flex flex-col gap-y-2'>
