@@ -95,5 +95,10 @@ class authController {
     }
     //End Method
 
+    getWriterById = async (req, res) => {
+
+    }
+     //End Method
+
 }
 module.exports = new authController()

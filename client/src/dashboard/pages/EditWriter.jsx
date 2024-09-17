@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { base_url } from '../../config/config';
+import axios from 'axios'
+import storeContext from '../../context/storeContext';
 
 const EditWriter = () => {
 
+    const {id} = useParams()
+    const {store} = useContext(storeContext)
     const [loader, setLoader] = useState(false); 
     const navigate = useNavigate()  
 
@@ -14,6 +19,26 @@ const EditWriter = () => {
     })
 //    console.log(state)
 
+const getWriterData = async () => { 
+    try { 
+        const { data } = 
+        await axios.get(`${base_url}/api/news/writer/${id}`, {
+            headers: {
+                'Authorization' : `Bearer ${store.token}`
+            }
+        } )      
+        setState({
+            name: data.writer.name,
+            email: data.writer.email,
+            category: data.writer.category,
+            role: data.writer.role,
+        })        
+         
+    } catch (error) { 
+        toast.error('Failed to load writer data')
+    }
+}
+
     const inputHandle = (e) => {
         setState({
             ...state,
@@ -24,7 +49,7 @@ const EditWriter = () => {
     return (
         <div className='bg-white rounded-md'>
             <div className='flex justify-between p-4'>
-                <h2 className='text-xl font-semibold'>Add Writers</h2>
+                <h2 className='text-xl font-semibold'>Edit Writers</h2>
                 <Link className='px-3 py-[6px] bg-blue-500 rounded-md text-white hover:bg-blue-800' to='/dashboard/writers'>
                 Writers
                 </Link> 
