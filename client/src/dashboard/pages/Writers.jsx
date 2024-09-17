@@ -71,7 +71,7 @@ const Writers = () => {
                 <td className='py-4 px-6'>{ item.email }</td> 
                 <td className='py-4 px-6'>
                     <div className='flex gap-3 text-gray-500'> 
-                        <Link to={`/dashboard/writer/${item._id}`} className='p-2 bg-yellow-500 text-white rounded hover:bg-yellow-800'>
+                        <Link to={`/dashboard/writer/edit/${item._id}`} className='p-2 bg-yellow-500 text-white rounded hover:bg-yellow-800'>
                         <FaEdit />
                         </Link> 
                         <Link to="#" className='p-2 bg-red-500 text-white rounded hover:bg-red-800'>
