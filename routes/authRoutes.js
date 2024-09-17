@@ -9,5 +9,7 @@ router.get('/api/news/writers',middleware.auth,middleware.role, authController.g
 router.get('/api/news/writer/:id',middleware.auth,middleware.role, authController.getWriterById)
 router.put('/api/update/writer/:id',middleware.auth,middleware.role, authController.update_writer)
 
+router.delete('/api/delete/writer/:id',middleware.auth,middleware.role, authController.delete_writer)
+
 
 module.exports = router
