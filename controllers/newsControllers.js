@@ -4,7 +4,7 @@ class newsControllers {
     add_news = async (req,res) => {
         console.log('add news')
     }
-
+    
 
 }
 
