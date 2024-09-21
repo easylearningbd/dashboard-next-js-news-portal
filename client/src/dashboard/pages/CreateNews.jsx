@@ -1,11 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaImages } from "react-icons/fa6";
 import JoditEditor from 'jodit-react';
 import Gallery from '../components/Gallery';
-
+import { base_url } from '../../config/config';
+import axios from 'axios'
+import toast from 'react-hot-toast'
+import storeContext from '../../context/storeContext';
 
 const CreateNews = () => {
+
+    const { store } = useContext(storeContext)
+
+
     const [loader, setLoader] = useState(false);
     const [show, setShow] = useState(false);
     const [images, setImages] = useState([]);
@@ -24,6 +31,28 @@ const CreateNews = () => {
         }
     }
 
+    const added = async (e) => {
+        e.preventDefault()
+        const formData  = new FormData()
+        formData.append('title',title)
+        formData.append('description',description)
+        formData.append('image',image)
+
+        try {
+            setLoader(true)
+            const { data } = await axios.post(`${base_url}/api/news/add`,formData, {
+                headers: {
+                    'Authorization' : `Bearer ${store.token}`
+                }
+            } )              
+            setLoader(false) 
+            toast.success(data.message)
+        } catch (error) {
+            setLoader(false)
+            toast.error(error.response.data.message)
+        }  
+    }
+
     return (
 <div className='bg-white shadow-md rounded-md p-6'>
     <div className='flex justify-between items-center mb-6'>
@@ -32,7 +61,7 @@ const CreateNews = () => {
         </Link> 
     </div>
 
-    <form>
+    <form onSubmit={added}>
         <div>
             <label htmlFor="title" className='block text-md font-medium text-gray-600 mb-2'>Title</label>
             <input value={title} onChange={(e) => setTitle(e.target.value) } type="text" placeholder='Enter News Title' name='title' id='title' className='w-full px-4 py-2 border rounded-md border-gray-300 focus:border-blue-500 outline-none transition h-10' required/>
