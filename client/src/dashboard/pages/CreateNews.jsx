@@ -47,6 +47,10 @@ const CreateNews = () => {
             } )              
             setLoader(false) 
             toast.success(data.message)
+            setTitle('')
+            setDescription('')
+            setImage('')
+            setImg('')
         } catch (error) {
             setLoader(false)
             toast.error(error.response.data.message)
