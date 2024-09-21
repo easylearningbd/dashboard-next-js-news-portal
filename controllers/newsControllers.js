@@ -17,7 +17,26 @@ class newsControllers {
             secure: true
         })
 
-        
+        try {
+            const [ fields, files ] = await form.parse(req)
+            const { url } = await cloudinary.uploader.upload(files.image[0].filepath, {folder: 'news_images'})
+            const {title,description} = fields
+
+            const news = await newsModel.create({
+                writerId: id,
+                writerName: name,
+                title: title[0].trim(), 
+                slug: title[0].trim().split(' ').join('-'),
+                category, 
+                description: description[0],
+                date: moment().format('LL'),
+                image: url
+            })
+            return res.status(201).json({message: 'News Added Successfully',news})
+            
+        } catch (error) {
+              return res.status(500).json({message: 'Internal server Error'})
+        } 
     }
     //End Method 
 

@@ -37,7 +37,7 @@ const CreateNews = () => {
         formData.append('title',title)
         formData.append('description',description)
         formData.append('image',image)
-
+        
         try {
             setLoader(true)
             const { data } = await axios.post(`${base_url}/api/news/add`,formData, {
