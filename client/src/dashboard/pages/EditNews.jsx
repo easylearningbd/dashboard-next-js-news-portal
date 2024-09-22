@@ -103,7 +103,7 @@ const EditNews = () => {
     }
 
 
-
+    
     const get_edit_news = async () => {
         try {
             const { data } = await axios.get(`${base_url}/api/edit/news/${news_id}`, {
@@ -113,7 +113,7 @@ const EditNews = () => {
             })   
             setTitle(data?.news?.title)
             setDescription(data?.news?.description)
-            setImage(data?.news?.image)
+            setImg(data?.news?.image)
             set_old_image(data?.news?.image)
         } catch (error) {
             console.log(error)
@@ -170,7 +170,7 @@ const EditNews = () => {
 
         <div className='mt-4'>
         <button type='submit' disabled={loader} className='px-3 py-[6px] bg-blue-500 rounded-md text-white hover:bg-blue-800'>
-        {loader ? 'Loading...' : 'Add News'}
+        {loader ? 'Loading...' : 'Update News'}
         </button>
 
     </div>  
