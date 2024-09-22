@@ -52,6 +52,11 @@ class newsControllers {
     }
      //End Method 
 
+    add_images = async (req, res) => {
+
+    }
+      //End Method 
+
 
 
 }
