@@ -14,6 +14,7 @@ import Writerindex from './dashboard/pages/Writerindex';
 import CreateNews from './dashboard/pages/CreateNews';
 import storeContext from './context/storeContext';
 import EditWriter from './dashboard/pages/EditWriter';
+import EditNews from './dashboard/pages/EditNews';
  
 
 function App() { 
@@ -43,6 +44,7 @@ function App() {
           <Route path='' element={<ProtectRole role='writer' />}>
             <Route path='writer' element={<Writerindex/>} />
             <Route path='news/create' element={<CreateNews/>} /> 
+            <Route path='news/edit/:news_id' element={<EditNews/>} />
           </Route> 
 
           </Route>  

@@ -101,6 +101,12 @@ class newsControllers {
     }
  //End Method 
 
+ get_edit_dashboard_news = async(req, res) => {
+    
+ }
+
+  //End Method
+
 
 }
 
