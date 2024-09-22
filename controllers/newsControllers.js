@@ -85,7 +85,19 @@ class newsControllers {
       //End Method 
 
     get_dashboard_news = async (req, res) => {
-       console.log(req.userInfo)
+      const {id, role} = req.userInfo
+      try {
+        if (role === 'admin') {
+            const news = await newsModel.find({}).sort({ createdAt: -1 })
+            return res.status(200).json({ news })
+        } else {
+            const news = await newsModel.find({ writerId: new ObjectId(id) }).sort({ createdAt: -1 })
+            return res.status(200).json({ news })
+        }
+        
+      } catch (error) {
+        return res.status(500).json({message: 'Internal server Error'})
+      }
     }
  //End Method 
 
