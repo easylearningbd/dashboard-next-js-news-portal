@@ -155,7 +155,38 @@ class newsControllers {
 
 delete_news = async (req, res) => {
     const { news_id } = req.params
-    console.log(news_id)
+
+    cloudinary.config({
+        cloud_name: process.env.cloud_name,
+        api_key: process.env.api_key,
+        api_secret: process.env.api_secret,
+        secure: true
+    })
+
+    try {
+        const news = await newsModel.findById(news_id);
+        if (!news) {
+            return res.status(404).json({message: 'News not found'});
+        }
+
+        const imageUrl = news.image
+        const publicId = imageUrl.split('/').pop().split('.')[0];
+
+        await cloudinary.uploader.destroy(`news_images/${publicId}` ,(error,result) => {
+            if (error)  {
+                console.log('error deleting image from cloudinary',error)
+                return res.status(500).json({ message: 'Failed to delete image form cloudinary' })
+            }
+            console.log('Image Deleted from Cloudinary',result)
+        })
+
+        await newsModel.findByIdAndDelete(news_id)
+        return res.status(200).json({ message: 'News deleted with Image successfully' })
+        
+    } catch (error) {
+        return res.status(500).json({message: 'Internal server Error'})
+    }
+     
 } 
 //End Method 
 
