@@ -84,6 +84,10 @@ class newsControllers {
     }
       //End Method 
 
+    get_dashboard_news = async (req, res) => {
+       console.log(req.userInfo)
+    }
+ //End Method 
 
 
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import profile from '../../assets/profile.png'
 import { Link } from 'react-router-dom';
 import { FaEye } from "react-icons/fa";
@@ -6,8 +6,33 @@ import { FaEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import storeContext from '../../context/storeContext';
+import { base_url } from '../../config/config';
+import axios from 'axios'
 
 const NewsContent = () => {
+
+    const { store } = useContext(storeContext)
+    const [news,setNews] = useState([])
+    const [ all_news, set_all_news] = useState([])
+
+    const get_news = async () => {
+        try {
+            const { data } = await axios.get(`${base_url}/api/news`, {
+                headers: {
+                    'Authorization' : `Bearer ${store.token}`
+                }
+            })   
+            set_all_news(data.news)
+            setNews(data.news)
+        } catch (error) {
+            console.log(error)
+        }
+    } 
+    
+    useEffect(() => {
+        get_news()
+    },[])
 
     return (
 <div className='bg-gray-50 min-h-screen p-6'>
