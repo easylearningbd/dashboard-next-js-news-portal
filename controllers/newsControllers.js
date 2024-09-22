@@ -153,6 +153,12 @@ class newsControllers {
 }
 //End Method 
 
+delete_news = async (req, res) => {
+    const { news_id } = req.params
+    console.log(news_id)
+} 
+//End Method 
+
 
 }
 
