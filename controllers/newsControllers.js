@@ -113,6 +113,46 @@ class newsControllers {
 
   //End Method
 
+  update_news = async (req,res) => {
+    const { news_id } = req.params
+    const form = formidable({})
+
+    cloudinary.config({
+        cloud_name: process.env.cloud_name,
+        api_key: process.env.api_key,
+        api_secret: process.env.api_secret,
+        secure: true
+    })
+
+    try {
+        const [ fields, files ] = await form.parse(req)
+        const {title,description} = fields
+        let url = fields.old_image[0]
+ 
+        if (Object.keys(files).length > 0) {
+            const spliteImage = url.split('/')
+            const imagesFile = spliteImage[spliteImage.length - 1].split('.')[0]
+            await cloudinary.uploader.destroy(imagesFile); 
+            const data = await cloudinary.uploader.upload(files.new_image[0].filepath, {folder: 'news_images'})
+            url = data.url
+        }
+        
+
+        const news = await newsModel.findByIdAndUpdate(news_id,{
+           
+            title: title[0].trim(), 
+            slug: title[0].trim().split(' ').join('-'), 
+            description: description[0], 
+            image: url
+        },{new: true})
+        return res.status(201).json({message: 'News Updated Successfully',news})
+        
+    } catch (error) {
+          return res.status(500).json({message: 'Internal server Error'})
+    } 
+}
+//End Method 
+
 
 }
 

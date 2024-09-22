@@ -31,26 +31,23 @@ const EditNews = () => {
         }
     }
 
-    const added = async (e) => {
+    const update = async (e) => {
         e.preventDefault()
         const formData  = new FormData()
         formData.append('title',title)
         formData.append('description',description)
-        formData.append('image',image)
+        formData.append('new_image',image)
+        formData.append('old_image',old_image)
         
         try {
             setLoader(true)
-            const { data } = await axios.post(`${base_url}/api/news/add`,formData, {
+            const { data } = await axios.put(`${base_url}/api/news/update/${news_id}`,formData, {
                 headers: {
                     'Authorization' : `Bearer ${store.token}`
                 }
             } )              
             setLoader(false) 
-            toast.success(data.message)
-            setTitle('')
-            setDescription('')
-            setImage('')
-            setImg('')
+            toast.success(data.message) 
         } catch (error) {
             setLoader(false)
             toast.error(error.response.data.message)
@@ -133,7 +130,7 @@ const EditNews = () => {
         </Link> 
     </div>
 
-    <form onSubmit={added}>
+    <form onSubmit={update}>
         <div>
             <label htmlFor="title" className='block text-md font-medium text-gray-600 mb-2'>Title</label>
             <input value={title} onChange={(e) => setTitle(e.target.value) } type="text" placeholder='Enter News Title' name='title' id='title' className='w-full px-4 py-2 border rounded-md border-gray-300 focus:border-blue-500 outline-none transition h-10' required/>
@@ -149,7 +146,7 @@ const EditNews = () => {
                 </div>
             } 
             </label>
-            <input onChange={imageHandle} type="file" className='hidden' id='img' required /> 
+            <input onChange={imageHandle} type="file" className='hidden' id='img' /> 
         </div>
 
         <div>
