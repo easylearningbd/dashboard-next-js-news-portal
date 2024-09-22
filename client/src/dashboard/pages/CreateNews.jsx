@@ -75,7 +75,7 @@ const CreateNews = () => {
 
     useEffect(() => {
         get_images()
-    },[])
+    },[images])
 
     const [imagesLoader, setImagesLoader] = useState(false);
     

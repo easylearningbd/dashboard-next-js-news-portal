@@ -54,6 +54,33 @@ class newsControllers {
 
     add_images = async (req, res) => {
 
+        const { id } = req.userInfo
+        const form = formidable({})
+
+        cloudinary.config({
+            cloud_name: process.env.cloud_name,
+            api_key: process.env.api_key,
+            api_secret: process.env.api_secret,
+            secure: true
+        })
+
+        try {
+            const [ _, files ] = await form.parse(req)
+            let allImages = []
+            const { images } = files
+
+        for (let i = 0; i < images.length; i++) {
+            const { url } = await cloudinary.uploader.upload(images[i].filepath, {folder: 'news_images'})
+            allImages.push({ writerId: id,url })
+        }
+
+        const image = await galleryModel.insertMany(allImages)
+        return res.status(201).json({ images:image, message: "Images Uploaded Successfully" })
+
+        } catch (error) {
+            return res.status(500).json({message: 'Internal server Error'})
+        }
+
     }
       //End Method 
 
