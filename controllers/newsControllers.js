@@ -1,6 +1,7 @@
 const {formidable} = require('formidable')
 const cloudinary = require('cloudinary').v2
 const newsModel = require('../models/newsModel')
+const galleryModel = require('../models/galleryModel')
 const {mongo: { ObjectId }} = require('mongoose')
 const moment = require('moment')
 
@@ -39,6 +40,12 @@ class newsControllers {
         } 
     }
     //End Method 
+
+    get_images = async (req, res) => {
+        const {id} = req.userInfo
+        console.log(id)
+    }
+     //End Method 
 
 
 

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaImages } from "react-icons/fa6";
 import JoditEditor from 'jodit-react';
@@ -15,7 +15,6 @@ const CreateNews = () => {
 
     const [loader, setLoader] = useState(false);
     const [show, setShow] = useState(false);
-    const [images, setImages] = useState([]);
 
     const editor = useRef(null)
     const [title,setTitle] = useState('')
@@ -56,6 +55,29 @@ const CreateNews = () => {
             toast.error(error.response.data.message)
         }  
     }
+
+    
+    const [images, setImages] = useState([]);
+
+    const get_images = async () => {
+        try {
+            const { data } = await axios.get(`${base_url}/api/images`, {
+                headers: {
+                    'Authorization' : `Bearer ${store.token}`
+                }
+            })   
+            console.log(data.images)
+            setImages(data.images)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        get_images()
+    },[])
+
+
 
     return (
 <div className='bg-white shadow-md rounded-md p-6'>
