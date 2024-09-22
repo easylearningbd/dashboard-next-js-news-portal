@@ -1,8 +1,15 @@
 import React from 'react';
 import { IoCloseCircle } from "react-icons/io5";
 import { FaImages } from "react-icons/fa";
+import copy from 'copy-text-to-clipboard'
+import toast from 'react-hot-toast';
 
 const Gallery = ({ setShow,images}) => {
+
+    const copy_url = (url) => {
+        copy(url)
+        toast.success('Image url Coiped success')
+    }
 
     return (
 <div className='w-screen h-screen fixed left-0 top-0 z-[9999]'>
@@ -29,7 +36,7 @@ const Gallery = ({ setShow,images}) => {
     <div className='grid grid-cols-4 gap-x-2 mt-4'>
     
      {
-        images.length > 0 && images.map((img,i) => <div className='cursor-pointer' key={i}>
+        images.length > 0 && images.map((img,i) => <div className='cursor-pointer' key={i} onClick={() => copy_url(img.url)} >
             <img src={img.url} alt="images" className='w-full h-[100px]'/>
         </div> 
         )
