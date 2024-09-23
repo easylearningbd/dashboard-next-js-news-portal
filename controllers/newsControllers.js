@@ -190,6 +190,20 @@ delete_news = async (req, res) => {
 } 
 //End Method 
 
+update_news_status = async (req, res) => {
+
+    const { role } = req.userInfo
+    const { news_id} = req.params
+    const { status } = req.body
+
+    console.log(role)
+    console.log(news_id)
+    console.log(status)
+
+}
+
+//End Method 
+
 
 }
 

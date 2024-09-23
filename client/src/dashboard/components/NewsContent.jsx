@@ -91,7 +91,30 @@ const NewsContent = () => {
     })
 
     const update_status = async (status, news_id) => {
+        try {
+            set_res({
+                id: news_id,
+                loader: true
+            })
+        const { data } = await axios.put(`${base_url}/api/news/status-update/${news_id}`,{status}, {
+            headers: {
+                'Authorization' : `Bearer ${store.token}`
+            }
+        })   
+        set_res({
+            id: '',
+            loader: false
+        })
+        toast.success(data.message)
+        get_news();
 
+        } catch (error) {
+            set_res({
+                id: '',
+                loader: false
+            })
+            console.log(error)
+        } 
     }
 
     return (
