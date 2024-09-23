@@ -179,11 +179,11 @@ const NewsContent = () => {
             </span>
         }
          {
-            n.status === 'active' && <span className='px-2 py-[2px] bg-blue-200 text-blue-800 rounded-md text-xs'>{n.status} 
+            n.status === 'active' && <span className='px-2 py-[2px] bg-green-200 text-green-800 rounded-md text-xs'>{n.status} 
             </span>
         }
          {
-            n.status === 'deactive' && <span className='px-2 py-[2px] bg-blue-200 text-blue-800 rounded-md text-xs'>{n.status} 
+            n.status === 'deactive' && <span className='px-2 py-[2px] bg-red-200 text-red-800 rounded-md text-xs'>{n.status} 
             </span>
         }
         </td>

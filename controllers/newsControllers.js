@@ -194,11 +194,15 @@ update_news_status = async (req, res) => {
 
     const { role } = req.userInfo
     const { news_id} = req.params
-    const { status } = req.body
+    const { status } = req.body 
 
-    console.log(role)
-    console.log(news_id)
-    console.log(status)
+    if (role === 'admin') {
+        const news = await newsModel.findByIdAndUpdate(news_id, {status},{news: true})
+        return res.status(200).json({ message: 'News Status Updated Success', news})
+    } else {
+        return res.status(401).json({message: 'You cannot acess this api'})
+    }
+   
 
 }
 
