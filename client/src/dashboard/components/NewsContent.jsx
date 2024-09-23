@@ -85,6 +85,15 @@ const NewsContent = () => {
         }
     }
 
+    const [res,set_res] = useState({
+        id: '',
+        loader: false
+    })
+
+    const update_status = async (status, news_id) => {
+
+    }
+
     return (
 <div className='bg-gray-50 min-h-screen p-6'>
     <div className='flex items-center gap-4 mb-6'>
@@ -123,9 +132,42 @@ const NewsContent = () => {
                 <td className='py-4 px-6'>{ n.category }</td>
                 <td className='py-4 px-6'>{convert(n.description).slice(0,15)}...</td>
                 <td className='py-4 px-6'>{ n.date }</td>
-                <td className='py-4 px-6'>
-                    <span className='px-3 py-1 bg-green-200 rounded-full text-xs font-semibold'>{ n.status }</span>
-                </td>
+               
+    {
+        store?.userInfo?.role === 'admin' ? 
+        <td className='py-4 px-6'>
+        {
+            n.status === 'pending' && <span onClick={() => update_status('active',n._id)} className='px-2 py-[2px] bg-blue-200 text-blue-800 rounded-md text-xs cursor-pointer'>{res.loader && res.id === n._id ? 'Loading..' : n.status} 
+            </span>
+        }
+        {
+            n.status === 'active' && <span onClick={() => update_status('deactive',n._id)} className='px-2 py-[2px] bg-green-200 text-green-800 rounded-md text-xs cursor-pointer'>{res.loader && res.id === n._id ? 'Loading..' : n.status} 
+            </span>
+        }
+        {
+            n.status === 'deactive' && <span onClick={() => update_status('active',n._id)} className='px-2 py-[2px] bg-red-200 text-red-800 rounded-md text-xs cursor-pointer'>{res.loader && res.id === n._id ? 'Loading..' : n.status} 
+            </span>
+        }
+        </td>  
+         :
+        <td className='py-4 px-6'>
+        {
+            n.status === 'pending' && <span className='px-2 py-[2px] bg-blue-200 text-blue-800 rounded-md text-xs'>{n.status} 
+            </span>
+        }
+         {
+            n.status === 'active' && <span className='px-2 py-[2px] bg-blue-200 text-blue-800 rounded-md text-xs'>{n.status} 
+            </span>
+        }
+         {
+            n.status === 'deactive' && <span className='px-2 py-[2px] bg-blue-200 text-blue-800 rounded-md text-xs'>{n.status} 
+            </span>
+        }
+        </td>
+    
+    }
+               
+               
                 <td className='py-4 px-6'>
                     <div className='flex gap-3 text-gray-500'>
                         <Link to="#" className='p-2 bg-blue-500 text-white rounded hover:bg-blue-800'>
