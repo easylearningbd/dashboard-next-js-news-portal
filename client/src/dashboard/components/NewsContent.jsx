@@ -71,10 +71,24 @@ const NewsContent = () => {
         setParPage(5)
     }
 
+    const type_filter = (e) => {
+        if (e.target.value === '') {
+            setNews(all_news)
+            setPage(1)
+            setParPage(5)
+
+        } else {
+            const tempNews = all_news.filter(n => n.status === e.target.value)
+            setNews(tempNews)
+            setPage(1)
+            setParPage(5)
+        }
+    }
+
     return (
 <div className='bg-gray-50 min-h-screen p-6'>
     <div className='flex items-center gap-4 mb-6'>
-        <select name="status" className='w-48 px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-400'>
+        <select onChange={type_filter} name="status" className='w-48 px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-400'>
             <option value="">--- Select Status ---</option>
             <option value="pending">Pending</option>
             <option value="active">Active</option>
