@@ -64,6 +64,13 @@ const NewsContent = () => {
         } 
     }
 
+    const search_news  = (e) => {
+        const tempNews = all_news.filter(n => n.title.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1)
+        setNews(tempNews)
+        setPage(1)
+        setParPage(5)
+    }
+
     return (
 <div className='bg-gray-50 min-h-screen p-6'>
     <div className='flex items-center gap-4 mb-6'>
@@ -73,7 +80,7 @@ const NewsContent = () => {
             <option value="active">Active</option>
             <option value="deactive">Deactive</option>
         </select>
-        <input type="text" placeholder='Search News' className='w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none' /> 
+        <input onChange={search_news} type="text" placeholder='Search News' className='w-full px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none' /> 
     </div>
 
     <div className='overflow-x-auto'>
