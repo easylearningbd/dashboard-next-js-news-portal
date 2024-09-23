@@ -17,6 +17,10 @@ const NewsContent = () => {
     const { store } = useContext(storeContext)
     const [news,setNews] = useState([])
     const [ all_news, set_all_news] = useState([])
+
+    const [parPage, setParPage] = useState(5)
+    const [pages,setPages] = useState(0)
+    const [page,setPage] = useState(1)
     
 
     const get_news = async () => {
@@ -36,6 +40,13 @@ const NewsContent = () => {
     useEffect(() => {
         get_news()
     },[])
+
+    useEffect(() => {
+        if (news.length > 0) {
+            const calculate_page = Math.ceil(news.length / parPage)
+            setPages(calculate_page)
+        }
+    },[news,parPage])
 
     const deleteNews = async (newsId) => {
         if (window.confirm('Are you sure to delete?')) {
@@ -81,7 +92,7 @@ const NewsContent = () => {
     </thead>
     <tbody className='text-gray-600'>
         {
-       news.map((n,i) => (
+       news.length > 0 && news.slice((page - 1) * parPage, page * parPage).map((n,i) => (
             <tr key={i} className='border-t'>
                 <td className='py-4 px-6'>{i+1}</td>
                 <td className='py-4 px-6'>{ n.title.slice(0,15) }...</td>
@@ -126,7 +137,10 @@ const NewsContent = () => {
 <div className='flex justify-between items-center py-6'>
     <div className='flex items-center gap-4'>
         <label className='text-sm font-semibold'>News Per Page:</label>
-        <select name="category" id="category" className='px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none'>
+        <select value={parPage} onChange={(e) => {
+            setParPage(parseInt(e.target.value))
+            setPage(1)
+        }} name="category" id="category" className='px-4 py-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none'>
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="15">15</option>
@@ -135,10 +149,14 @@ const NewsContent = () => {
     </div>
 
     <div className='flex items-center gap-4 text-sm text-gray-600'>
-        <span>6/10 of 5</span>
+        <span className='font-bold'> {(page - 1) * parPage + 1}/{news.length} - {pages} </span>
         <div className='flex gap-2'>
-        <IoIosArrowBack className='w-6 h-6 text-gray-400 cursor-pointer hover:text-gray-800' />
-        <IoIosArrowForward  className='w-6 h-6 text-gray-400 cursor-pointer hover:text-gray-800' />
+        <IoIosArrowBack onClick={() => {
+            if (page > 1) setPage(page - 1)  
+        }} className='w-6 h-6 text-gray-400 cursor-pointer hover:text-gray-800' />
+        <IoIosArrowForward onClick={() => {
+            if (page < pages) setPage(page + 1)  
+        }} className='w-6 h-6 text-gray-400 cursor-pointer hover:text-gray-800' />
         </div> 
     </div> 
 </div>
