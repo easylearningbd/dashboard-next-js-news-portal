@@ -1,13 +1,28 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
  
-const SimpleNewsCard = () => {
+const SimpleNewsCard = ({item,type}) => {
     return (
 <div className='group relative'>
     <div className='overflow-hidden'>
-        <div className='h-[250px] sm:h-[470px] w-full'>
-            <Image className='' layout='fill' src={'https://res.cloudinary.com/dbxtifnah/image/upload/v1727089746/news_images/rdoyrpq7gexo1phaclnf.webp'} alt='images' />
+        <div className={`${type ? 'h-[270px] sm:h-[470px]' : 'h-[228px]'} w-full group-hover:scale-[1.1] transition-all duration-[1s]`}>
+            <Image className='' layout='fill' src={'https://res.cloudinary.com/dbxtifnah/image/upload/v1727025863/news_images/hoz9yxkg1uhkufjhfdh3.png'} alt='images' />
 
+        </div> 
+    </div>
+
+    <div className='w-full h-full block absolute left-0 top-0 invisible group-hover:visible bg-white cursor-pointer opacity-5 transition-all duration-300'>
+    </div>
+    <div className='left-5 absolute bottom-4 flex justify-start items-start flex-col text-white font-semibold gap-y-2'>
+        <div className='px-[6px] py-[2px] rounded-md text-[13px] bg-[#c80000]'>
+        Category
+        </div>
+        <Link href={'/'} className='text-xl'>
+        What puzzles reveal about the depths of our own</Link>
+        <div className='flex gap-x-2 text-sm font-medium'>
+        <span>25-09-2024</span>
+        <span>By Ariyan</span>
         </div>
 
     </div>
