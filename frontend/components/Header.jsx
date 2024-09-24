@@ -7,6 +7,7 @@ import logo from '../assets/logo.png'
 import adver_image from '../assets/add.png'
 import bg_header from '../assets/header-bg.jpg'
 import Image from 'next/image';
+import Header_Category from './Header_Category';
 
 
 const Header = () => {
@@ -47,7 +48,8 @@ const Header = () => {
             </div> 
         </div> 
     </div> 
-            
+
+        <Header_Category/>  
         </header>
     );
 };
