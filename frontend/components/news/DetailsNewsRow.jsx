@@ -1,6 +1,7 @@
 import React from 'react';
 import Title from '../Title';
 import SimpleDetailsNewCard from './item/SimpleDetailsNewCard';
+import NewsCard from './item/NewsCard';
 
 const DetailsNewsRow = ({category,type}) => {
     return (
@@ -9,9 +10,17 @@ const DetailsNewsRow = ({category,type}) => {
 
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-6'>
             <SimpleDetailsNewCard type={type} height={300} />
+        
+        <div className='grid grid-cols-1 gap-2'>
+            {
+                [1,2,3].map((item, i) => (
+                    <NewsCard item={item} key={i} />
+                ))
+            }
 
         </div>
-          
+
+        </div> 
         </div>
     );
 };
