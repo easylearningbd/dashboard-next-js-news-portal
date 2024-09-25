@@ -1,6 +1,7 @@
 import HeadLines from "@/components/HeadLines";
 import SimpleNewsCard from "@/components/news/item/SimpleNewsCard";
 import LatestNews from "@/components/news/LatestNews";
+import PopularNews from "@/components/news/PopularNews";
 import Title from "@/components/Title";
 import Image from "next/image";
 
@@ -26,12 +27,12 @@ export default function Home() {
            )
         }
 
-      </div>
-      </div>
-
-        </div>
-
+         </div>
+       </div> 
+       </div> 
       </div> 
+
+      <PopularNews type="Popular News" />
 
 
     </div> 
