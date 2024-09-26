@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const SimpleDetailsNewCard = ({type}) => {
+const SimpleDetailsNewCard = ({news,type}) => {
     return (
 
 <div className='bg-white shadow'>
@@ -31,7 +31,7 @@ const SimpleDetailsNewCard = ({type}) => {
         { type === 'details_news' && 
         <p className='text-sm text-slate-600 pt-3'>
 The news that Margot Robbie and Jacob Elordi are starring in Emerald Fennell's take on Emily Brontë's romance has caused a storm – no surprise in an age of increased casting scrutiny. 
-        </p>  }
+        </p>  } 
     </div>
     
     
