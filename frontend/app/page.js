@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import HeadLines from "@/components/HeadLines";
 import DetailsNews from "@/components/news/DetailsNews";
 import DetailsNewsCol from "@/components/news/DetailsNewsCol";
@@ -108,7 +107,7 @@ export default function Home() {
 
       
      </main>
-     <Footer/>
+    
      </div>
 
   );
