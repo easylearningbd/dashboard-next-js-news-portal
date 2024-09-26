@@ -3,6 +3,7 @@ import logo from '../assets/logo.png'
 import Image from 'next/image';
 import Gallery from './news/Gallery';
 import Category from './Category';
+import RecentNewsFooter from './news/RecentNewsFooter';
 
 const Footer = () => {
     return (
@@ -28,6 +29,7 @@ const Footer = () => {
         <div>
             <Category titleStyle="text-white" />
         </div>
+        <RecentNewsFooter/> 
 
 
         </div> 
