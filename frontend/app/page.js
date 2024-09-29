@@ -12,10 +12,15 @@ import Image from "next/image";
 
 const Home = async () => {
 
-  const news_data = await fetch(`${base_api_url}/api/all/news`);
+  const news_data = await fetch(`${base_api_url}/api/all/news`, {
+    next: {
+      revalidate: 5,
+    }
+  });
 
-
-
+  let news = await news_data?.json()
+  news = news.news
+ 
 
   return (
     <div>
