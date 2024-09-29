@@ -201,13 +201,16 @@ update_news_status = async (req, res) => {
         return res.status(200).json({ message: 'News Status Updated Success', news})
     } else {
         return res.status(401).json({message: 'You cannot acess this api'})
-    }
-   
+    } 
 
 }
 
 //End Method 
 
+get_all_news = async (req,res) => {
+    console.log('get api')
+}
+//End Method 
 
 }
 
