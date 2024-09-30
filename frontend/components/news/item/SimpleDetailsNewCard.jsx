@@ -5,7 +5,7 @@ const { convert } = require('html-to-text')
 
 const SimpleDetailsNewCard = ({news,type}) => {
     return (
-
+ 
 <div className='bg-white shadow'>
     <div className='group relative overflow-hidden'>
         <div className="w-full h-[250px] group-hover:scale-[1.1] transition-all duration-[1s]">

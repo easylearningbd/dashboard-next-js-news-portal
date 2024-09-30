@@ -26,7 +26,7 @@ const Header_Category = () => {
         get_categories()
     },[])
 
-    const path = usePathname() 
+    const path = usePathname()  
 
     const [cate_show, set_cate_show] = useState(false)
     const [show, setShow] = useState(false)
