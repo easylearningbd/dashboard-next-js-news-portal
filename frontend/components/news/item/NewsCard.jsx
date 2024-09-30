@@ -10,7 +10,7 @@ const NewsCard = ({item}) => {
             <Image
             layout='fill'
             className='object-cover rounded-md'
-            src="https://res.cloudinary.com/dbxtifnah/image/upload/v1726960712/news_images/m3xqhhcapfjaudcdlkfl.png" alt='Image'
+            src={ item?.image } alt='Image'
             />
         
         <div className='absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md'> 
@@ -19,16 +19,16 @@ const NewsCard = ({item}) => {
     </div> 
 
     <div className='flex flex-col justify-between pl-4 w-full'>
-            <Link href={`/`} className='text-xs font-semibold text-blue-600 hover:underline'>
-            Category Name
+            <Link href={`/news/category/${item?.category}`} className='text-xs font-semibold text-blue-600 hover:underline'>
+            { item?.category }
             </Link>
 
-            <Link href={`/`} className='text-base font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300'>
-            What puzzles reveal about the depths of our own
+            <Link href={`/news/${item?.slug}`} className='text-base font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300'>
+            { item?.title }
             </Link> 
             <div className='flex gap-x-3 text-xs text-gray-500'>
-                <span className='font-semibold'>02-09-2024</span>
-                <span className='font-semibold'>By Ariyan</span>
+                <span className='font-semibold'> { item?.date }</span>
+                <span className='font-semibold'>By { item?.writerName }</span>
             </div>
       </div>    
 

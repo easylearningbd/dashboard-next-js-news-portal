@@ -57,12 +57,18 @@ const Home = async () => {
       <div className="w-full">
         <div className="flex flex-wrap">
           <div className="w-full lg:w-8/12">
-            <DetailsNewsRow category="Sports" type="details_news" />
-            <DetailsNews category="Health" />
+            <DetailsNewsRow category="Sports" 
+            type="details_news"
+            news={news["Sports"]} />
+            
+            <DetailsNews category="Health" 
+             news={news["Health"]} />
           </div>
 
           <div className="w-full lg:w-4/12">
-        <DetailsNewsCol category="Education" />
+        <DetailsNewsCol 
+         news={news["Education"]}
+         category="Education" />
           </div>
 
         </div> 
