@@ -16,7 +16,7 @@ const Header_Category = () => {
             const res = await fetch(`${base_api_url}/api/category/all`)
             const data = await res.json()
             set_categories(data.categories)
-            console.log(data) 
+            // console.log(data) 
         } catch (error) {
             console.log(error)
         }
@@ -26,33 +26,7 @@ const Header_Category = () => {
         get_categories()
     },[])
 
-    const path = usePathname()
-    const data = [
-        {
-            id: 1,
-            name: 'Sports'
-        },
-        {
-            id: 2,
-            name: 'Travel'
-        },
-        {
-            id: 3,
-            name: 'Education'
-        },
-        {
-            id: 4,
-            name: 'National'
-        },
-        {
-            id: 5,
-            name: 'Politice'
-        },
-        {
-            id: 6,
-            name: 'Technology'
-        },
-    ]
+    const path = usePathname() 
 
     const [cate_show, set_cate_show] = useState(false)
     const [show, setShow] = useState(false)
@@ -69,7 +43,7 @@ const Header_Category = () => {
             <Link className={`px-6 font-medium py-[13px] ${path === '/' ? 'bg-[#00000026]' : ''} `} href={'/'} > Home </Link>
 
             {
-                data.map((c,i) => <Link key={i} className={`px-6 font-medium py-[13px] ${path === c.name ? 'bg-[#00000026]' : ''} `} href={'/'} > { c.name} </Link>)
+                categories.length > 0 && categories.map((c,i) => <Link key={i} className={`px-6 font-medium py-[13px] ${path === c.category ? 'bg-[#00000026]' : ''} `} href={`/news/category/${c.category}`} > { c.category} </Link>)
             } 
         </div>
 
@@ -104,10 +78,10 @@ const Header_Category = () => {
 
     {
         cate_show &&  <div className='flex flex-wrap lg:hidden py-2 px-[30px]'>
-        <Link className={`px-4 font-medium py-[5px] ${path === '/' ? 'bg-[#00000026]' : ''} `} href={'/'} > Home </Link>
+        <Link className={`px-4 font-medium py-[5px] ${path === '/' ? 'bg-[#00000026]' : ''} `} href={'/'} > Home </Link> 
 
         {
-            data.map((c,i) => <Link key={i} className={`px-4 font-medium py-[5px] ${path === c.name ? 'bg-[#00000026]' : ''} `} href={'/'} > { c.name} </Link>)
+            categories.length > 0 && categories.map((c,i) => <Link key={i} className={`px-4 font-medium py-[5px] ${path === c.category ? 'bg-[#00000026]' : ''} `} href={`/news/category/${c.category}`} > { c.category} </Link>)
         } 
     </div>
     }
