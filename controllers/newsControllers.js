@@ -260,6 +260,33 @@ get_all_news = async (req,res) => {
 }
 //End Method 
 
+get_categories = async(req,res) => {
+
+    try {
+        const categories = await newsModel.aggregate([
+            {
+                $group: {
+                    _id: '$category',
+                    count: {$sum: 1}
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    category: "$_id", 
+                    count: 1
+                }
+            }
+        ])
+        return res.status(200).json({categories})
+    } catch (error) {
+        return res.status(500).json({message: 'Internal server Error'})
+    }
+
+}
+
+//End Method 
+
 }
 
 module.exports = new newsControllers()
