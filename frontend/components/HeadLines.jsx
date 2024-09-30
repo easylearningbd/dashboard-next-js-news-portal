@@ -3,30 +3,7 @@ import LoadingSpinner from 'react-spinners-components'
 import Marquee from 'react-fast-marquee';
 import Link from 'next/link';
 
-const HeadLines = () => {
-
-    const head = [
-        {
-            title: 'Modi meets top US tech leaders amid semiconductor push'
-        },
-        {
-            title: 'Six dead after record rain causes floods in Japan'
-        },
-        {
-            title: 'Modi meets top US tech leaders amid semiconductor push'
-        },
-        {
-            title: 'Six dead after record rain causes floods in Japan'
-        },
-        {
-            title: 'Modi meets top US tech leaders amid semiconductor push'
-        },
-        {
-            title: 'Six dead after record rain causes floods in Japan'
-        },
-    ]
-
-
+const HeadLines = ({news}) => { 
     return (
         <div className='bg-white shadow flex flex-wrap'>
             <div className='flex md:w-[170px] w-full bg-[#dddddd] relative after:absolute after:bg-[#dddddd] after:w-[20px] after:left-[160px] after:skew-x-[20deg] after:top-0 after:bottom-0 after:z-30'>
@@ -40,11 +17,18 @@ const HeadLines = () => {
             <div className='flex w-full justify-start items-center'>
         <Marquee>
             {
-                head.map((h,i) => <Link key={i} className='py-3 font-semibold hover:text-[#c80000] pr-12 text-sm' href={'/'}>
-                    {h.title}
+                Object.keys(news).length > 0 &&
+                Object.keys(news).map((c,i) => <>
+                 {
+                news[c].length > 0 && news[c].map((n,i) => <Link key={i} className='py-3 font-semibold hover:text-[#c80000] pr-12 text-sm' href={`/news/${n.slug}`}>
+                    {n.title}
                 </Link>
                 )
+              } 
+                
+                </> )
             }
+           
         </Marquee>
             </div>
 
