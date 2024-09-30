@@ -1,12 +1,12 @@
 import Breadcrumb from '@/components/Breadcrumb';
 import Category from '@/components/Category';
-import SimpleDetailsNewCard from '@/components/news/item/SimpleDetailsNewCard';
-import PopularNews from '@/components/news/PopularNews';
+import SimpleDetailsNewCard from '@/components/news/item/SimpleDetailsNewCard'; 
 import RecentNews from '@/components/news/RecentNews';
 import Search from '@/components/news/Search';
 import HtmlParser from 'react-html-parser';
 import { base_api_url } from '@/config/config';
 import React from 'react';
+import RelatedNews from '@/components/news/RelatedNews';
 
 const Details = async ({ params }) => {
 
@@ -70,7 +70,7 @@ const Details = async ({ params }) => {
         </div> 
 
     <div className='pt-8'>
-        <PopularNews/>
+        <RelatedNews news={relatedNews} type="Related News" />
 
     </div>
     </div> 
