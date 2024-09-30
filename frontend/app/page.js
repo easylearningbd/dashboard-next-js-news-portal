@@ -40,9 +40,11 @@ const Home = async () => {
       <Title title="Technology" />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px]">
         {
-          [1,2,3,4].map((item,i) => <SimpleNewsCard item={item} key={i} />
-           )
-        }
+          news["Technology"].map((item,i) => {
+            if (i < 4) {
+              return <SimpleNewsCard item={item} key={i} />
+            }
+          })}
 
          </div>
        </div> 
