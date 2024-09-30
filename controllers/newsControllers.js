@@ -311,13 +311,23 @@ get_details_news = async (req, res) => {
      }).limit(4).sort({ createAt: -1 })
 
         return res.status(200).json({ news: news ? news: {}, relatedNews})
-        
+
     } catch (error) {
         return res.status(500).json({message: 'Internal server Error'})
     }
      
 }
 //End Method 
+
+get_category_news = async (req, res) => {
+    const {category} =  req.params
+    console.log(category)
+}
+//End Method 
+
+
+
+
 
 }
 
