@@ -19,8 +19,7 @@ const Home = async () => {
   });
 
   let news = await news_data?.json()
-  news = news.news
- 
+  news = news.news 
 
   return (
     <div>
@@ -79,14 +78,18 @@ const Home = async () => {
         <div className="flex flex-wrap">
           <div className="w-full lg:w-4/12">
           <div className="pl-3">
-          <DetailsNewsCol category="Politics" /> 
-          </div>
+          <DetailsNewsCol category="Business"
+          news={news["Business"]} /> 
+          </div> 
           </div>
 
           <div className="w-full lg:w-8/12">
           <div className="pl-3">
-          <DetailsNewsRow category="Travel" type="details_news" />
-          <DetailsNews category="International" />
+          <DetailsNewsRow category="Travel" type="details_news"
+          news={news["Travel"]} />
+
+          <DetailsNews category="International"
+          news={news["International"]} />
           </div>
           </div>
 
@@ -98,7 +101,8 @@ const Home = async () => {
       <div className="w-full">
         <div className="flex flex-wrap">
           <div className="w-full lg:w-8/12">
-            <DetailsNewsRow category="Technology" type="details_news" />
+            <DetailsNewsRow category="Technology"
+            news={news["Technology"]}  type="details_news" />
             
           </div>
 
@@ -107,7 +111,7 @@ const Home = async () => {
             <Title title="Recent News" />
             <div className="grid grid-cols-1 gap-y-[8px] mt-2">
               {
-                [1,2,3,4].map((item,i) => (
+                news['Sports'].map((item,i) => (
                   <NewsCard item={item} key={i} />
                 ))
               }

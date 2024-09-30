@@ -246,7 +246,7 @@ get_all_news = async (req,res) => {
                 }
             }
         ])
-
+ 
     const news = {}
     for (let i = 0; i < category_news.length; i++) {
         news[category_news[i].category] = category_news[i].news 

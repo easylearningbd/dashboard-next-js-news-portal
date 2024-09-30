@@ -65,7 +65,7 @@ const AddWriter = () => {
             <label htmlFor="name" className='text-md font-semibold text-gray-600'>Name</label>
             <input onChange={inputHandle} value={state.name} required type="text" placeholder='Name' name='name' className='px-3 py-2 rounded-md outline-0 border border-gray-300 focus:border-blue-500 h-10' id='name' /> 
             </div>
-
+ 
             <div className='flex flex-col gap-y-2'>
             <label htmlFor="name" className='text-md font-semibold text-gray-600'>Category</label>
             <select  onChange={inputHandle} value={state.category} required name="category" id='category' className='px-3 py-2 rounded-md outline-0 border border-gray-300 focus:border-blue-500 h-10'>
@@ -76,6 +76,7 @@ const AddWriter = () => {
             <option value="International">International</option>
             <option value="Sports">Sports</option>
             <option value="Technology">Technology</option>
+            <option value="Business">Business</option>
             </select> 
             </div> 
         </div> 

@@ -23,7 +23,7 @@ const SimpleDetailsNewCard = ({news,type}) => {
     </div>
 
     <div className='p-5'>
-    <Link href={`/news/${news.slug}`} className='text-[15px] font-semibold text-[#333333] hover:text-[#c80000]'>
+    <Link href={`/news/${news?.slug}`} className='text-[15px] font-semibold text-[#333333] hover:text-[#c80000]'>
     {news?.title}</Link>
         <div className='flex gap-x-2 text-xs font-normal text-slate-600'>
         <span className='font-semibold'>{news?.date}</span>
