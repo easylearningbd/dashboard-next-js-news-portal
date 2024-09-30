@@ -4,9 +4,21 @@ import SimpleDetailsNewCard from '@/components/news/item/SimpleDetailsNewCard';
 import PopularNews from '@/components/news/PopularNews';
 import RecentNews from '@/components/news/RecentNews';
 import Search from '@/components/news/Search';
+import { base_api_url } from '@/config/config';
 import React from 'react';
 
-const page = () => {
+const Details = async ({ params }) => {
+
+    const { slug } = params;
+
+    const res = await fetch(`${base_api_url}/api/news/details/${slug}`,{
+        next: {
+            revalidate: 1
+        }
+    })
+   
+    // const {news, relatedNews} = await res.json()
+
     return (
 <div>
     <div className='bg-white shadow-sm py-4'>
@@ -85,4 +97,4 @@ Her brother has previously said his battle for justice was like "fighting a bout
     );
 };
 
-export default page;
+export default Details;

@@ -19,4 +19,6 @@ router.put('/api/news/status-update/:news_id',middleware.auth,newsControllers.up
  router.get('/api/all/news',newsControllers.get_all_news)
  router.get('/api/category/all',newsControllers.get_categories)
 
+ router.get('/api/news/details/:slug',newsControllers.get_details_news)
+
 module.exports = router

@@ -287,6 +287,13 @@ get_categories = async(req,res) => {
 
 //End Method 
 
+
+get_details_news = async (req, res) => {
+    const { slug } = req.params
+    console.log(slug)
+}
+//End Method 
+
 }
 
 module.exports = new newsControllers()
