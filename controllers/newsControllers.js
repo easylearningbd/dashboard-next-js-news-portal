@@ -406,6 +406,13 @@ get_images_news = async (req, res) => {
 }
 //End Method 
 
+news_search = async (req, res) => {
+    const { value } =  req.query;
+    console.log(value)
+}
+
+//End Method 
+
 
 
 }

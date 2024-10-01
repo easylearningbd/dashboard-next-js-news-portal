@@ -27,4 +27,6 @@ router.put('/api/news/status-update/:news_id',middleware.auth,newsControllers.up
  router.get('/api/recent/news',newsControllers.get_recent_news)
  router.get('/api/images/news',newsControllers.get_images_news)
 
+ router.get('/api/search/news',newsControllers.news_search)
+
 module.exports = router
