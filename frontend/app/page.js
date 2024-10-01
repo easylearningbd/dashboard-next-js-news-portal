@@ -6,6 +6,7 @@ import NewsCard from "@/components/news/item/NewsCard";
 import SimpleNewsCard from "@/components/news/item/SimpleNewsCard";
 import LatestNews from "@/components/news/LatestNews";
 import PopularNews from "@/components/news/PopularNews";
+import RecentNews from "@/components/news/RecentNews";
 import Title from "@/components/Title";
 import { base_api_url } from "@/config/config";
 import Image from "next/image";
@@ -108,15 +109,7 @@ const Home = async () => {
 
           <div className="w-full lg:w-4/12">
           <div className="pl-3">
-            <Title title="Recent News" />
-            <div className="grid grid-cols-1 gap-y-[8px] mt-2">
-              {
-                news['Sports'].map((item,i) => (
-                  <NewsCard item={item} key={i} />
-                ))
-              }
-
-            </div> 
+             <RecentNews/>
           </div>  
           </div> 
         </div> 

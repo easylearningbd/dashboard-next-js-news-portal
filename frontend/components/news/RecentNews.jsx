@@ -1,8 +1,19 @@
 import React from 'react';
 import Title from '../Title';
 import NewsCard from './item/NewsCard';
+import { base_api_url } from '@/config/config';
 
-const RecentNews = () => {
+const RecentNews = async () => {
+
+    const res = await fetch(`${base_api_url}/api/recent/news`,{
+        next: {
+            revalidate: 1
+        }
+    })
+   
+    const {news} = await res.json() 
+
+
     return (
         <div className='w-full flex flex-col gap-y-[6px] bg-white pt-4'>
             <div className='pl-4'>
@@ -10,7 +21,7 @@ const RecentNews = () => {
             </div>
         <div className='grid grid-cols-1 gap-y-1'>
             {
-                [1,2,3,4].map((item,i) => (
+                news && news.length > 0 && news.map((item,i) => (
                     <NewsCard key={i} item={item} />
                 ))
             }

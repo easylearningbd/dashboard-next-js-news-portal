@@ -368,6 +368,16 @@ get_latest_news = async (req, res) => {
 }
 //End Method 
 
+get_recent_news = async (req, res) => {
+    try {
+        const news = await newsModel.find({ status: 'active' }).sort({createdAt: -1 }).skip(6).limit(5)
+        return res.status(200).json({ news })
+    } catch (error) {
+        return res.status(500).json({message: 'Internal server Error'})
+    }
+}
+//End Method 
+
 
 
 }
