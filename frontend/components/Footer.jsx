@@ -33,7 +33,7 @@ const Footer = () => {
         <div>
             <Category titleStyle="text-white" />
         </div>
-        <RecentNewsFooter/>  
+        <RecentNewsFooter/>   
 
         </div> 
     </div> 
