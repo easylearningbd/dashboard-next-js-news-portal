@@ -1,19 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaEye } from "react-icons/fa";
 import news from '../../assets/news.webp'
+import { base_url } from '../../config/config';
+import axios from 'axios'
 
 const Adminindex = () => {
+
+    const [start, setStart] = useState({
+        totalNews: 0,
+        pendingNews: 0,
+        activeNews: 0,
+        deactiveNews: 0,
+        totalWriters:0
+    })
+
+    useEffect(() => {
+        const fetchStars = async () => {
+            try {
+                const {data} = await axios.get(`${base_url}/api/news-statistics`);
+                setStart(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchStars()
+    },[])
 
     return (
 <div className='mt-6'>
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6'>
         {[
-            {title: 'Total News', value:50, color: 'text-red-500'},
-            {title: 'Pending News', value:55, color: 'text-purple-500'},
-            {title: 'Active News', value:22, color: 'text-cyan-500'},
-            {title: 'Deactive News', value:15, color: 'text-blue-500'},
-            {title: 'Writers', value:10, color: 'text-green-500'},
+            {title: 'Total News', value:start.totalNews, color: 'text-red-500'},
+            {title: 'Pending News', value:start.pendingNews, color: 'text-purple-500'},
+            {title: 'Active News', value:start.activeNews, color: 'text-cyan-500'},
+            {title: 'Deactive News', value:start.deactiveNews, color: 'text-blue-500'},
+            {title: 'Writers', value:start.totalWriters, color: 'text-green-500'},
         ].map((start, i) => (
             <div key={i} className='p-8 bg-white rounded-lg shadow-md flex flex-col items-center gap-2'>
                 <span className={`text-4xl font-bold ${start.color}`}>

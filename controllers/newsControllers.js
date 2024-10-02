@@ -1,6 +1,7 @@
 const {formidable} = require('formidable')
 const cloudinary = require('cloudinary').v2
 const newsModel = require('../models/newsModel')
+const authModel = require('../models/authModel')
 const galleryModel = require('../models/galleryModel')
 const {mongo: { ObjectId }} = require('mongoose')
 const moment = require('moment')
@@ -426,6 +427,29 @@ news_search = async (req, res) => {
      
 }
 
+//End Method 
+
+news_statistics = async (req, res) => {
+    try {
+const totalNews = await newsModel.countDocuments()
+const pendingNews = await newsModel.countDocuments({ status: 'pending' })
+const activeNews = await newsModel.countDocuments({ status: 'active' })
+const deactiveNews = await newsModel.countDocuments({ status: 'deactive' })
+const totalWriters = await authModel.countDocuments({ role: 'writer' })
+
+return res.status(200).json({
+    totalNews,
+    pendingNews,
+    activeNews,
+    deactiveNews,
+    totalWriters
+});
+
+    } catch (error) {
+         return res.status(500).json({message: 'Internal server Error'})
+    }
+
+}
 //End Method 
 
 
