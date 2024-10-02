@@ -210,6 +210,19 @@ update_profile = async (req, res) => {
     //End Method
 
     get_profile = async (req, res) => {
+        try {
+         const userId = req.params.id;
+
+        if (!userId) {
+            return res.status(400).json({message: 'User Id is required'})
+        }
+
+        const user = await authModel.findById(userId)
+        return res.status(200).json({ user })
+            
+        } catch (error) {
+            return res.status(500).json({ message: 'Internal Server Error' })
+        }
 
     }
      //End Method
