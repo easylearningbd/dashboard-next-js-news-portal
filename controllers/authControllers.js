@@ -209,6 +209,11 @@ update_profile = async (req, res) => {
 }
     //End Method
 
+    get_profile = async (req, res) => {
+
+    }
+     //End Method
+
 
 }
 module.exports = new authController()

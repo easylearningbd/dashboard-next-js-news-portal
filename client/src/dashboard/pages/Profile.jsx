@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaImage } from "react-icons/fa";
 import storeContext from './../../context/storeContext';
 import { base_url } from '../../config/config';
@@ -14,6 +14,26 @@ const Profile = () => {
     const [image, setImage] =  useState(null)
     const [message, setMessage] = useState("")
     const [imageUrl, setImageUrl] = useState("") // Current Image 
+
+useEffect(() => {
+    const fetchProfile = async () => {
+        try {
+            const response = await axios.get(`${base_url}/api/profile/${store.userInfo.id}`, {
+                headers: {
+                    'Authorization' : `Bearer ${store.token}`
+                }
+            })
+        const {name, email, image} = response.data.user;
+        setName(name)
+        setEmail(email)
+        setImageUrl(image)
+        } catch (error) {
+            setMessage("Faild to load profile data")
+        }
+    }
+    fetchProfile();
+
+},[store.userInfo.id,store.token, setName,setEmail])
 
 
     const handleFileChange = (e) => {
