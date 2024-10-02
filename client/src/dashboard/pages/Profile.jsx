@@ -98,6 +98,7 @@ useEffect(() => {
             setNewPassword("")
             setPasswordError("")
         } catch (error) {
+            toast.error(error.response.data.message)
             setPasswordError("Failed to update password")
         } 
     }
