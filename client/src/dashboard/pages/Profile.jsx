@@ -1,6 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { FaImage } from "react-icons/fa";
 import storeContext from './../../context/storeContext';
+import { base_url } from '../../config/config';
+import axios from 'axios' 
+import toast from 'react-hot-toast'
 
 const Profile = () => {
 
@@ -12,6 +15,37 @@ const Profile = () => {
     const [message, setMessage] = useState("")
     const [imageUrl, setImageUrl] = useState("") // Current Image 
 
+
+    const handleFileChange = (e) => {
+        setImage(e.target.files[0])
+    } 
+
+
+    /// Handle Profile Update 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const formData = new FormData();
+        formData.append('name',name);
+        formData.append('email',email);
+        if (image) {
+            formData.append('image',image);
+        }
+
+    try {
+
+        const response = await axios.put(`${base_url}/api/update-profile/${store.userInfo.id}`,formData, {
+            headers: {
+                'Authorization' : `Bearer ${store.token}`
+            }
+        })
+        setMessage("Profile Updated Successfully")
+        toast.success(response.data.message)           
+        setImageUrl(response.data.updatedUser.image)
+    } catch (error) {
+        setMessage("Failed to update profile");
+     } 
+
+    }
 
     return (
 <div className='w-full grid grid-cols-1 lg:grid-cols-2 gap-2 mt-5'>
@@ -28,7 +62,7 @@ const Profile = () => {
                     </label>
                 )
             }  
-            <input type="file" id='img' className='hidden' /> 
+            <input type="file" id='img' className='hidden' onChange={handleFileChange} /> 
         </div>
 
         <div className='ml-6 text-gray-700 flex flex-col space-y-2'>
@@ -40,6 +74,12 @@ const Profile = () => {
              
             <p className='text-gray-600 text-xl font-bold'>Category: <span className='text-gray-600 text-xl font-bold'> {store.userInfo?.category }</span></p>
 
+        <form onSubmit={handleSubmit}>
+            <div className='mt-6'>
+                <button type='submit' className='w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-800 transition duration-300'>Update Profile</button> 
+            </div>
+        </form>
+        {message && <p className='text-center mt-4'>{message}</p>}
         </div> 
     </div>
 
